@@ -1,0 +1,30 @@
+/* Estilos propios que complementan a Bootstrap (no se redefinen clases de Bootstrap) */
+
+/* Altura mínima para que el footer quede al pie */
+body {
+    min-height: 100vh;
+}
+
+/* Tarjetas de producto: imagen con altura uniforme para alinear las cards */
+.card-producto {
+    height: 100%;
+}
+
+.card-producto .card-img-top {
+    height: 220px;
+    object-fit: contain;
+    padding: 1rem;
+    background-color: #f8f9fa;
+}
+
+/* Precio resaltado dentro de la card */
+.precio {
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+/* Feedback visual al pasar el mouse sobre la card (interactividad) */
+.card-producto:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.2s ease-in-out;
+}

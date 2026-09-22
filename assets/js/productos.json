@@ -1,0 +1,170 @@
+[
+  {
+    "id": 1,
+    "nombre": "El lobo estepario",
+    "autor": "Hermann Hesse",
+    "img": "assets/img/libro-lobo-estepario.webp",
+    "precio": 10000
+  },
+  {
+    "id": 2,
+    "nombre": "El extranjero",
+    "autor": "Albert Camus",
+    "img": "assets/img/libro-extranjero.webp",
+    "precio": 8000
+  },
+  {
+    "id": 3,
+    "nombre": "Demian",
+    "autor": "Hermann Hesse",
+    "img": "assets/img/libro-demian.webp",
+    "precio": 9000
+  },
+  {
+    "id": 4,
+    "nombre": "El coronel no tiene quien le escriba",
+    "autor": "Gabriel García Márquez",
+    "img": "assets/img/libro-coronel.webp",
+    "precio": 12000
+  },
+  {
+    "id": 5,
+    "nombre": "La floristería",
+    "autor": "Sarah Eden",
+    "img": "assets/img/libro-floristeria.webp",
+    "precio": 7000
+  },
+  {
+    "id": 6,
+    "nombre": "La biblioteca de medianoche",
+    "autor": "Matt Haig",
+    "img": "assets/img/libro-biblioteca-medianoche.webp",
+    "precio": 11000
+  },
+  {
+    "id": 7,
+    "nombre": "La casa en el mar azul",
+    "autor": "TJ Klune",
+    "img": "assets/img/libro-casa-mar-azul.webp",
+    "precio": 13000
+  },
+  {
+    "id": 8,
+    "nombre": "Cien años de soledad",
+    "autor": "Gabriel García Márquez",
+    "img": "assets/img/portada-8.svg",
+    "precio": 15000
+  },
+  {
+    "id": 9,
+    "nombre": "Don Quijote de la Mancha",
+    "autor": "Miguel de Cervantes",
+    "img": "assets/img/portada-9.svg",
+    "precio": 14000
+  },
+  {
+    "id": 10,
+    "nombre": "1984",
+    "autor": "George Orwell",
+    "img": "assets/img/portada-10.svg",
+    "precio": 12000
+  },
+  {
+    "id": 11,
+    "nombre": "Rebelión en la granja",
+    "autor": "George Orwell",
+    "img": "assets/img/portada-11.svg",
+    "precio": 9000
+  },
+  {
+    "id": 12,
+    "nombre": "Crimen y castigo",
+    "autor": "Fiódor Dostoyevski",
+    "img": "assets/img/portada-12.svg",
+    "precio": 13000
+  },
+  {
+    "id": 13,
+    "nombre": "La metamorfosis",
+    "autor": "Franz Kafka",
+    "img": "assets/img/portada-13.svg",
+    "precio": 8000
+  },
+  {
+    "id": 14,
+    "nombre": "El proceso",
+    "autor": "Franz Kafka",
+    "img": "assets/img/portada-14.svg",
+    "precio": 10000
+  },
+  {
+    "id": 15,
+    "nombre": "Orgullo y prejuicio",
+    "autor": "Jane Austen",
+    "img": "assets/img/portada-15.svg",
+    "precio": 9000
+  },
+  {
+    "id": 16,
+    "nombre": "Cumbres borrascosas",
+    "autor": "Emily Brontë",
+    "img": "assets/img/portada-16.svg",
+    "precio": 11000
+  },
+  {
+    "id": 17,
+    "nombre": "El gran Gatsby",
+    "autor": "F. Scott Fitzgerald",
+    "img": "assets/img/portada-17.svg",
+    "precio": 12000
+  },
+  {
+    "id": 18,
+    "nombre": "Ficciones",
+    "autor": "Jorge Luis Borges",
+    "img": "assets/img/portada-18.svg",
+    "precio": 10000
+  },
+  {
+    "id": 19,
+    "nombre": "Rayuela",
+    "autor": "Julio Cortázar",
+    "img": "assets/img/portada-19.svg",
+    "precio": 14000
+  },
+  {
+    "id": 20,
+    "nombre": "Pedro Páramo",
+    "autor": "Juan Rulfo",
+    "img": "assets/img/portada-20.svg",
+    "precio": 9000
+  },
+  {
+    "id": 21,
+    "nombre": "El túnel",
+    "autor": "Ernesto Sabato",
+    "img": "assets/img/portada-21.svg",
+    "precio": 8000
+  },
+  {
+    "id": 22,
+    "nombre": "La sombra del viento",
+    "autor": "Carlos Ruiz Zafón",
+    "img": "assets/img/portada-22.svg",
+    "precio": 15000
+  },
+  {
+    "id": 23,
+    "nombre": "Harry Potter y la piedra filosofal",
+    "autor": "J.K. Rowling",
+    "img": "assets/img/portada-23.svg",
+    "precio": 13000
+  },
+  {
+    "id": 24,
+    "nombre": "El señor de los anillos",
+    "autor": "J.R.R. Tolkien",
+    "img": "assets/img/portada-24.svg",
+    "precio": 18000
+  }
+]
