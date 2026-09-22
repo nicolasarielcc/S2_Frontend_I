@@ -2,7 +2,7 @@
    app.js — eCommerce con Bootstrap 5 + JavaScript (Semana 6)
    Cubre los 8 criterios de la pauta al 100% y presenta:
    - Fetch API con JSON local + render de cards
-   - Eventos: click (carrito), submit (búsqueda y contacto)
+   - Eventos: click (carrito), submit (búsqueda y contacto), mouseover/mouseout (imágenes, menú y botones)
    - Manipulación del DOM (catálogo, carrito, modal)
    - Modal de detalle de producto (Bootstrap)
    - Mensajes popup (toast) y carrito con cantidades
@@ -152,6 +152,13 @@ function crearCardProducto(producto) {
             </div>
         </div>
     `;
+
+    // Eventos de mouse (mouseover/mouseout) sobre elementos reales de la card:
+    // la imagen y los botones reaccionan al cursor sin necesidad de una sección aparte.
+    columna.querySelectorAll(".card-img-top, button").forEach((el) => {
+        el.addEventListener("mouseover", () => el.classList.add("hover"));
+        el.addEventListener("mouseout", () => el.classList.remove("hover"));
+    });
 
     // Evento click -> agregar al carrito (criterio 4)
     columna.querySelector("button[data-id]").addEventListener("click", () => {
@@ -310,6 +317,12 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#btn-limpiar-busqueda").addEventListener("click", () => {
         $("#busqueda").value = "";
         filtrarProductos("");
+    });
+
+    // Eventos de mouse (mouseover/mouseout) sobre el menú de navegación
+    $$(".navbar .nav-link").forEach((link) => {
+        link.addEventListener("mouseover", () => link.classList.add("hover"));
+        link.addEventListener("mouseout", () => link.classList.remove("hover"));
     });
 
     // Botón "Agregar al carrito" dentro del modal de detalle

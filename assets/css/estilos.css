@@ -33,3 +33,32 @@ body {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     transition: box-shadow 0.2s ease-in-out;
 }
+
+/* --- Eventos de mouse (mouseover/mouseout) sobre elementos reales --- */
+
+/* Imagen del libro: zoom suave al pasar el mouse */
+.card-producto .card-img-top {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card-producto .card-img-top.hover {
+    transform: scale(1.06);
+}
+
+/* Enlaces del menú: resaltado al pasar el mouse */
+.navbar .nav-link {
+    transition: color 0.2s ease-in-out;
+}
+
+.navbar .nav-link.hover {
+    color: #ffc107;
+}
+
+/* Botones: leve elevación al pasar el mouse */
+.btn {
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn.hover {
+    transform: translateY(-2px);
+}
