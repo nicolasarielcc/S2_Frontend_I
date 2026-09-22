@@ -209,6 +209,28 @@ function agregarAlCarrito(id) {
     mostrarResumen();
 }
 
+function quitarCopia(id) {
+    const item = estado.carrito.find((i) => i.id === id);
+    if (!item) return;
+
+    item.cantidad -= 1;
+
+    // Si no quedan copias, se elimina el libro del carrito
+    if (item.cantidad <= 0) {
+        estado.carrito = estado.carrito.filter((i) => i.id !== id);
+    }
+
+    guardarCarrito();
+    mostrarResumen();
+}
+
+function vaciarCarrito() {
+    estado.carrito = [];
+    guardarCarrito();
+    mostrarResumen();
+    mostrarToast("Carrito vaciado");
+}
+
 function mostrarResumen() {
     const lista = $("#lista-carrito");
     const totalElemento = $("#total-carrito");
@@ -235,8 +257,18 @@ function mostrarResumen() {
         item.className = "list-group-item d-flex justify-content-between align-items-center";
         item.innerHTML = `
             <span>${producto.nombre} <span class="badge bg-secondary rounded-pill">x${entrada.cantidad}</span></span>
-            <span>${formatearPrecio(subtotal)}</span>
+            <span class="d-flex align-items-center gap-2">
+                <span>${formatearPrecio(subtotal)}</span>
+                <button class="btn btn-sm btn-outline-danger" data-quitar="${entrada.id}" type="button"
+                    aria-label="Quitar una copia" title="Quitar una copia">&minus;</button>
+            </span>
         `;
+
+        // Evento click -> quitar una copia del carrito
+        item.querySelector("[data-quitar]").addEventListener("click", () => {
+            quitarCopia(entrada.id);
+        });
+
         lista.appendChild(item);
     });
 
@@ -347,6 +379,9 @@ document.addEventListener("DOMContentLoaded", () => {
             modal?.hide();
         }
     });
+
+    // Botón "Vaciar carrito"
+    $("#btn-vaciar-carrito").addEventListener("click", vaciarCarrito);
 
     // Formulario de contacto (evento submit + validación)
     const formContacto = $("#form-contacto");
