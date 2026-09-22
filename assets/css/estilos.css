@@ -33,28 +33,3 @@ body {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     transition: box-shadow 0.2s ease-in-out;
 }
-
-/* --- Demo de eventos de mouse --- */
-.demo-box {
-    height: 140px;
-    border: 2px dashed var(--bs-secondary);
-    background-color: #f8f9fa;
-    transition: all 0.2s ease-in-out;
-    font-weight: 600;
-}
-
-.demo-box.hover {
-    background-color: #fff3cd;
-    border-color: var(--bs-warning);
-    transform: scale(1.02);
-}
-
-/* --- Glosario de conceptos --- */
-.glosario dt {
-    font-weight: 700;
-    margin-top: 0.75rem;
-}
-
-.glosario dd {
-    margin-bottom: 0.25rem;
-}

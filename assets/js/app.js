@@ -2,10 +2,10 @@
    app.js — eCommerce con Bootstrap 5 + JavaScript (Semana 6)
    Cubre los 8 criterios de la pauta al 100% y presenta:
    - Fetch API con JSON local + render de cards
-   - Eventos: click (carrito), submit (búsqueda), mouseover/mouseout
+   - Eventos: click (carrito), submit (búsqueda y contacto)
    - Manipulación del DOM (catálogo, carrito, modal)
    - Modal de detalle de producto (Bootstrap)
-   - Interacción con una API externa (Fake Store API)
+   - Mensajes popup (toast) y carrito con cantidades
    - Manejo de errores con mensaje amigable
    Código organizado en funciones reutilizables y comentado.
    ========================================================= */
@@ -26,7 +26,6 @@ const $$ = (sel) => document.querySelectorAll(sel);
 
 // URLs de datos
 const URL_PRODUCTOS = "assets/js/productos.json";
-const URL_EXTERNA = "https://fakestoreapi.com/products";
 
 // Formatear precio como moneda chilena
 function formatearPrecio(valor) {
@@ -293,53 +292,7 @@ function filtrarProductos(termino) {
 }
 
 // =========================================================
-//  6) API EXTERNA (Fake Store API)
-// =========================================================
-async function cargarProductosExternos() {
-    const grid = $("#grid-externos");
-    const estadoUI = $("#externos-estado");
-
-    grid.replaceChildren();
-    estadoUI.innerHTML = `
-        <div class="d-inline-flex align-items-center gap-2 text-muted">
-            <div class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></div>
-            <span>Cargando productos desde Fake Store API...</span>
-        </div>`;
-
-    try {
-        const respuesta = await fetch(URL_EXTERNA);
-        if (!respuesta.ok) {
-            throw new Error("Error HTTP " + respuesta.status);
-        }
-        const productos = await respuesta.json();
-
-        estadoUI.innerHTML = "";
-        const fragmento = document.createDocumentFragment();
-
-        productos.slice(0, 8).forEach((producto) => {
-            const columna = document.createElement("div");
-            columna.className = "col-12 col-sm-6 col-lg-3";
-            columna.innerHTML = `
-                <div class="card card-producto h-100 shadow-sm">
-                    <img src="${producto.image}" class="card-img-top" alt="${producto.title}" />
-                    <div class="card-body d-flex flex-column">
-                        <h3 class="h6 card-title">${producto.title}</h3>
-                        <p class="card-text precio">$${producto.price}</p>
-                    </div>
-                </div>
-            `;
-            fragmento.appendChild(columna);
-        });
-
-        grid.appendChild(fragmento);
-    } catch (error) {
-        console.error("Error al cargar la API externa:", error);
-        estadoUI.innerHTML = `<div class="alert alert-danger mb-0">No se pudieron cargar los productos externos: ${error.message}</div>`;
-    }
-}
-
-// =========================================================
-//  7) CONFIGURACIÓN INICIAL DE EVENTOS
+//  6) CONFIGURACIÓN INICIAL DE EVENTOS
 // =========================================================
 document.addEventListener("DOMContentLoaded", () => {
     // Evento submit del formulario de búsqueda (criterio 4)
@@ -357,18 +310,6 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#btn-limpiar-busqueda").addEventListener("click", () => {
         $("#busqueda").value = "";
         filtrarProductos("");
-    });
-
-    // Eventos de mouse (mouseover / mouseout)
-    const cajaHover = $("#caja-hover");
-    cajaHover.addEventListener("mouseover", () => cajaHover.classList.add("hover"));
-    cajaHover.addEventListener("mouseout", () => cajaHover.classList.remove("hover"));
-
-    // API externa
-    $("#btn-cargar-externos").addEventListener("click", cargarProductosExternos);
-    $("#btn-limpiar-externos").addEventListener("click", () => {
-        $("#grid-externos").replaceChildren();
-        $("#externos-estado").innerHTML = "";
     });
 
     // Botón "Agregar al carrito" dentro del modal de detalle
@@ -391,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
             formContacto.classList.add("was-validated");
             return;
         }
-        mostrarToast("Su requerimiento fue enviado");
+        mostrarToast("Mensaje enviado");
         formContacto.reset();
         formContacto.classList.remove("was-validated");
     });
