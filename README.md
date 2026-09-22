@@ -19,11 +19,18 @@ proyecto-ecommerce-S6/
 
 ## Cómo ejecutar localmente
 
-La carga del JSON local con `fetch()` requiere servidor (no abrir `index.html` directamente por `file://`). Opciones:
+> **Importante:** la carga del JSON local con `fetch()` requiere un servidor. Si abres `index.html` con doble clic (protocolo `file://`), el navegador **bloquea** `fetch()` y no se mostrarán los productos (ni el modal, ni el carrito). La página te lo advertirá con un mensaje.
+
+Opciones:
 
 1. **VS Code + Live Server**: clic derecho en `index.html` → *Open with Live Server*.
-2. **Python**:
+2. **Python** (desde la carpeta del proyecto):
    ```bash
+   cd proyecto-ecommerce-S6
    python3 -m http.server 8000
    # abrir http://localhost:8000
+   ```
+3. **Node**:
+   ```bash
+   npx http-server
    ```

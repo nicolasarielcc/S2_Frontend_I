@@ -35,8 +35,16 @@ function mostrarCargando(visible) {
     $("#indicador-carga").style.display = visible ? "" : "none";
 }
 
-function mostrarError(visible) {
-    $("#indicador-error").style.display = visible ? "" : "none";
+function mostrarError(mensaje) {
+    const el = $("#indicador-error");
+    if (mensaje !== undefined) {
+        el.innerHTML = mensaje;
+    }
+    el.style.display = "";
+}
+
+function ocultarError() {
+    $("#indicador-error").style.display = "none";
 }
 
 function mostrarSinResultados(visible) {
@@ -48,7 +56,19 @@ function mostrarSinResultados(visible) {
 // =========================================================
 async function cargarProductos() {
     mostrarCargando(true);
-    mostrarError(false);
+    ocultarError();
+
+    // Al abrir el archivo directamente (file://) el navegador bloquea fetch()
+    // de archivos locales. Se indica al usuario cómo abrirlo correctamente.
+    if (window.location.protocol === "file:") {
+        mostrarCargando(false);
+        mostrarError(
+            'No se pueden cargar los productos al abrir el archivo directamente (<code>file://</code>).<br>' +
+            'Abre el proyecto con un servidor local:<br>' +
+            '<kbd>python3 -m http.server 8000</kbd> &nbsp;o&nbsp; usa <strong>Live Server</strong> en VS Code.'
+        );
+        return;
+    }
 
     try {
         const respuesta = await fetch(URL_PRODUCTOS);
@@ -61,7 +81,7 @@ async function cargarProductos() {
     } catch (error) {
         // Mensaje amigable al usuario (criterio 6)
         console.error("Error al cargar productos:", error);
-        mostrarError(true);
+        mostrarError("No se pudieron cargar los productos. Intenta nuevamente más tarde.");
     } finally {
         mostrarCargando(false);
     }
