@@ -13,9 +13,12 @@
 // --- Estado de la aplicación (en memoria) ---
 const estado = {
     productos: [],     // catálogo cargado desde el JSON local
-    carrito: [],       // ids de productos agregados al carrito
+    carrito: [],       // [{ id, cantidad }] productos agregados al carrito
     detalleId: null    // id del producto abierto en el modal
 };
+
+// Clave de localStorage donde se guarda la "copia JSON" del carrito
+const CARRITO_KEY = "bookstore-carrito";
 
 // --- Helpers de selección (reutilizables) ---
 const $ = (sel) => document.querySelector(sel);
@@ -49,6 +52,32 @@ function ocultarError() {
 
 function mostrarSinResultados(visible) {
     $("#sin-resultados").style.display = visible ? "" : "none";
+}
+
+// --- Mensajes popup (toast de Bootstrap) ---
+function mostrarToast(mensaje) {
+    const toastEl = $("#toast");
+    $("#toast-body").textContent = mensaje;
+    bootstrap.Toast.getOrCreateInstance(toastEl).show();
+}
+
+// --- Persistencia del carrito (copia JSON en localStorage) ---
+// Se guarda el estado del carrito como JSON para conservarlo entre recargas.
+function guardarCarrito() {
+    localStorage.setItem(CARRITO_KEY, JSON.stringify(estado.carrito));
+}
+
+function cargarCarrito() {
+    try {
+        const datos = JSON.parse(localStorage.getItem(CARRITO_KEY));
+        if (Array.isArray(datos)) {
+            estado.carrito = datos.filter(
+                (i) => i && typeof i.id === "number" && typeof i.cantidad === "number"
+            );
+        }
+    } catch {
+        estado.carrito = [];
+    }
 }
 
 // =========================================================
@@ -164,11 +193,19 @@ function verDetalle(id) {
 //  4) CARRITO (manipulación del DOM)
 // =========================================================
 function agregarAlCarrito(id) {
-    // Evita duplicar un producto ya agregado
-    if (estado.carrito.includes(id)) {
-        return;
+    const item = estado.carrito.find((i) => i.id === id);
+
+    if (item) {
+        // El libro ya existía: se agrega una copia más
+        item.cantidad += 1;
+        mostrarToast("El libro ya existía en el carrito, se agregó una copia");
+    } else {
+        // Libro nuevo en el carrito
+        estado.carrito.push({ id, cantidad: 1 });
+        mostrarToast("Libro añadido al carrito");
     }
-    estado.carrito.push(id);
+
+    guardarCarrito();
     mostrarResumen();
 }
 
@@ -187,16 +224,18 @@ function mostrarResumen() {
     vacio.style.display = "none";
 
     let total = 0;
-    estado.carrito.forEach((id) => {
-        const producto = estado.productos.find((p) => p.id === id);
+    estado.carrito.forEach((entrada) => {
+        const producto = estado.productos.find((p) => p.id === entrada.id);
         if (!producto) return;
 
-        total += producto.precio;
+        const subtotal = producto.precio * entrada.cantidad;
+        total += subtotal;
+
         const item = document.createElement("li");
         item.className = "list-group-item d-flex justify-content-between align-items-center";
         item.innerHTML = `
-            <span>${producto.nombre}</span>
-            <span>${formatearPrecio(producto.precio)}</span>
+            <span>${producto.nombre} <span class="badge bg-secondary rounded-pill">x${entrada.cantidad}</span></span>
+            <span>${formatearPrecio(subtotal)}</span>
         `;
         lista.appendChild(item);
     });
@@ -309,7 +348,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Iniciamos la carga del catálogo y el resumen del carrito
+    // Formulario de contacto (evento submit + validación)
+    const formContacto = $("#form-contacto");
+    formContacto.addEventListener("submit", (evento) => {
+        evento.preventDefault();
+        if (!formContacto.checkValidity()) {
+            formContacto.classList.add("was-validated");
+            return;
+        }
+        mostrarToast("Su requerimiento fue enviado");
+        formContacto.reset();
+        formContacto.classList.remove("was-validated");
+    });
+
+    // Cargamos el carrito guardado y el catálogo
+    cargarCarrito();
     cargarProductos();
     mostrarResumen();
 });

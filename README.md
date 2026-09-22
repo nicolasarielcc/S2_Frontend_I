@@ -34,3 +34,12 @@ Opciones:
    ```bash
    npx http-server
    ```
+
+## Características
+
+- **Catálogo** de 24 libros cargados con `fetch()` desde `assets/js/productos.json`.
+- **Carrito** con cantidades (se agrega una copia si el libro ya existe), resumen dinámico y **total**.
+- Persistencia del carrito en `localStorage` (se guarda una **copia JSON** del carrito entre recargas).
+- Mensajes **popup (toast)**: "Libro añadido al carrito", "El libro ya existía en el carrito, se agregó una copia" y "Su requerimiento fue enviado".
+- **Búsqueda** (evento `submit`) y **formulario de contacto** con validación.
+- **Modal** de detalle de producto, **carrusel**, eventos de mouse y carga desde la **Fake Store API**.
