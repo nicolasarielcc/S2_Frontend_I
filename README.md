@@ -27,30 +27,3 @@ La carga del JSON local con `fetch()` requiere servidor (no abrir `index.html` d
    python3 -m http.server 8000
    # abrir http://localhost:8000
    ```
-
-## Cumplimiento de la pauta (columna 100%)
-
-| # | Criterio | Implementación |
-|---|---|---|
-| 1 | Bootstrap 5 correcto y responsivo | CDN 5.3.3, grid (`container/row/col`), cards, `lang="es"`, viewport |
-| 2 | Barra de navegación | `navbar-expand-md` + toggler + collapse, 4 categorías simuladas |
-| 3 | DOM (carrito + resumen dinámico) | `mostrarResumen()` actualiza lista + total sin recargar |
-| 4 | Eventos `click` y `submit` | `click` (agregar al carrito) y `submit` (formulario de búsqueda) |
-| 5 | Fetch API + JSON local | `fetch("assets/js/productos.json")` |
-| 6 | Validaciones / errores | `.catch` → mensaje amigable + ocultar indicador de carga |
-| 7 | Código modular + comentarios | Funciones reutilizables (`cargarProductos`, `renderProductos`, etc.) |
-| 8 | Publicación en GitHub | Ver sección siguiente |
-
-## Publicación en GitHub (criterio 8)
-
-1. Crear un **repositorio público**.
-2. Subir esta misma estructura de archivos.
-3. Habilitar **GitHub Pages**:
-   - *Settings → Pages → Branch: `main` → carpeta `/ (root)`* **o** crear una rama `gh-pages`.
-4. Compartir el enlace del repositorio y del despliegue en AVA.
-
-## Entrega (AVA)
-
-- Comprimir como `nombre_Alumno_PFY2201_Optimización_Semana6.zip`.
-- Adjuntar capturas de pantalla de: estructura de la página, interacción (agregar al carrito / búsqueda) y carga de datos con Fetch.
-# S2_Frontend_I
