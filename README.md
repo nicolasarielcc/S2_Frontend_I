@@ -53,3 +53,4 @@ La carga del JSON local con `fetch()` requiere servidor (no abrir `index.html` d
 
 - Comprimir como `nombre_Alumno_PFY2201_Optimización_Semana6.zip`.
 - Adjuntar capturas de pantalla de: estructura de la página, interacción (agregar al carrito / búsqueda) y carga de datos con Fetch.
+# S2_Frontend_I
